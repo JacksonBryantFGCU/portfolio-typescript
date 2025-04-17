@@ -1,0 +1,8 @@
+{
+    "responseOverrides": {
+        "compression": {
+            "enableBrotli": true,
+            "enableGzip": true
+        }
+    }
+}  
