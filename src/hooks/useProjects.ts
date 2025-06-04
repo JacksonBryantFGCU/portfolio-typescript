@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
+import pb from "../pocketbase"
 
 export type Project = {
   id: number
@@ -15,24 +16,10 @@ export const useProjects = () => {
   return useQuery<Project[]>({
     queryKey: ["projects"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://qlsizofiileraiahjlym.supabase.co/rest/v1/projects",
-        {
-          headers: {
-            apikey: import.meta.env.VITE_SUPABASE_KEY!,
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_KEY!}`,
-          },
-        }
-      )
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        console.error("❌ Supabase error:", data)
-        throw new Error(data.message || "Failed to fetch projects")
-      }
-
-      return data
+      const records = await pb.collection("projects").getFullList<Project>({
+        sort: "-created",
+      })
+      return records as unknown as Project[]
     },
     staleTime: 1000 * 60 * 5,
     retry: 2,

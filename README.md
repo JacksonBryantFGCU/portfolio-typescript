@@ -11,7 +11,7 @@ A responsive, single-page portfolio website built with modern front-end technolo
 - **React** (TypeScript)
 - **Tailwind CSS**
 - **Framer Motion**
-- **Supabase** (dynamic content)
+- **PocketBase** (dynamic content)
 - **Vite**
 - **Microsoft Azure** (custom domain hosting)
 
@@ -20,7 +20,7 @@ A responsive, single-page portfolio website built with modern front-end technolo
 ### Features
 - Fully responsive layout (mobile-first)
 - Smooth animations with Framer Motion
-- Dynamic project data pulled from Supabase
+- Dynamic project data pulled from PocketBase
 - Custom Azure deployment with domain and SEO
 - Interactive LinkedIn, GitHub, and resume download buttons
 
@@ -36,4 +36,4 @@ npm run dev
 ```
 
 ### Lessons Learned
-This project helped me deepen my experience with component-based architecture, responsive design, and integrating Supabase for dynamic content management. It also refined my deployment workflow through Azure.
+This project helped me deepen my experience with component-based architecture, responsive design, and integrating PocketBase for dynamic content management. It also refined my deployment workflow through Azure.

@@ -1,5 +1,6 @@
 // src/hooks/useCertifications.ts
 import { useQuery } from "@tanstack/react-query"
+import pb from "../pocketbase"
 
 export type Certification = {
     id: number
@@ -17,22 +18,11 @@ export const useCertifications = () => {
   return useQuery<Certification[]>({
     queryKey: ["certifications"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://qlsizofiileraiahjlym.supabase.co/rest/v1/certifications",
-        {
-          headers: {
-            apikey: import.meta.env.VITE_SUPABASE_KEY!,
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_KEY!}`,
-          },
-        }
-      )
+      const records = await pb
+        .collection("certifications")
+        .getFullList<Certification>({ sort: "-created" })
 
-      const data: Certification[] = await res.json()
-
-      if (!res.ok) throw new Error("Failed to fetch certifications")
-
-      // Sort by date (latest first)
-      return data.sort((a: Certification, b: Certification) => {
+      return records.sort((a: Certification, b: Certification) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime()
       })
     },
